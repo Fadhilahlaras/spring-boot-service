@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html layout:decorate="~{base}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div class="row mb-2" layout:fragment="content-header">
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Biodata Dosen</h1>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Biodata Dosen</a></li>
+            <li class="breadcrumb-item active">Kelola</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row" layout:fragment="content-body">
+
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">List Biodata Dosen</h3>
+                <button class="float-right btn-primary" id="btn-tambah-biodata">Tambah</button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive">
+                <table class="table table-striped table-bordered table-hover nowrap" id="tableDosen"
+                       style="width:100%"></table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+
+
+    <div class="modal fade" id="modal-dosen">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Form Biodata Dosen</h4>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-header">
+
+                    </div>
+                    <form id="form-dosen" role="form">
+
+                        <div class="form-group">
+                            <label>Kode Dosen : </label>
+                            <input class="form-control" id="id" name="id"
+                                   placeholder="Kode Dosen" required type="text">
+                        </div>
+
+                        <input id="idTypeDosen" name="idTypeDosen" type="hidden">
+                        <input id="idJurusan" name="idJurusan" type="hidden">
+
+                        <div class="form-group">
+                            <label>Nama Dosen: </label>
+                            <input class="form-control" id="namaDosen" name="namaDosen"
+                                   placeholder="Nama Dosen" required type="text">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="namaJurusan">Jurusan : </label>
+                            <select class="form-control" id="namaJurusan" name="idJurusan"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="deskripsiTypeDosen">Deskripsi : </label>
+                            <select class="form-control" id="deskripsiTypeDosen" name="idTypeDosen"></select>
+                        </div>
+
+
+
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-primary" id="btn-save-biodata" type="button">Save</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="modal-delete">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4> Apakah anda yakin ingin menghapus data ini ?</h4>
+                    <button class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-hidden-id">
+                    <p>Data ini akan hilang ketika anda menekan tombol "Delete"</p>
+                    <input id="idDel" name="idDel" type="hidden" />
+                    <input id="idDetail" name="idDetail" type="hidden">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-default" data-dismiss="modal" type="button"> Close </button>
+                    <button class="btn btn-danger" id="btn-delete-row" type="button"> Delete </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<th:block layout:fragment="add-scripts">
+    <script th:src="@{/assets/js/dosen.js}"></script>
+
+    <script>
+        tableDosen.create();
+
+        $('#btn-tambah-biodata').click(function () {
+            formDosen.resetForm()
+            $('#modal-dosen').modal('show')
+        });
+
+        $('#btn-save-biodata').click(function () {
+            formDosen.saveForm()
+        });
+
+        $('#btn-delete-row').click(function () {
+            actionDelete.deleteRowData()
+        });
+
+        dropdown.pilihJurusan();
+        dropdown.pilihTypeDosen();
+
+    </script>
+
+</th:block>
+
+</html>
