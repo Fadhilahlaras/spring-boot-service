@@ -26,10 +26,10 @@ public class MahasiswaController {
 
     @PostMapping("/save")
     public MahasiswaDto saveMahasiswa(@RequestBody MahasiswaDto mahasiswaDto){
-        MahasiswaDto m = new MahasiswaDto();
-        m.setNamaMahasiswa(mahasiswaDto.getNamaMahasiswa());
-        m.setAlamat(mahasiswaDto.getAlamat());
+        MahasiswaDto n = new MahasiswaDto();
+        n.setNamaMahasiswa(mahasiswaDto.getNamaMahasiswa());
+        n.setAlamat(mahasiswaDto.getAlamat());
 
-        return m;
+        return n;
     }
 }
