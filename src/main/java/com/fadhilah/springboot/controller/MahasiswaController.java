@@ -2,6 +2,8 @@ package com.fadhilah.springboot.controller;
 
 import com.fadhilah.springboot.model.dto.MahasiswaDto;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
@@ -21,4 +23,13 @@ public class MahasiswaController {
 //    public DefaultResponse<MahasiswaDto> getBiodataByEmail(WebRequest request){
 //        return DefaultResponse.ok(service.getBiodataByEmail(request));
 //    }
+
+    @PostMapping("/save")
+    public MahasiswaDto saveMahasiswa(@RequestBody MahasiswaDto mahasiswaDto){
+        MahasiswaDto m = new MahasiswaDto();
+        m.setNamaMahasiswa(mahasiswaDto.getNamaMahasiswa());
+        m.setAlamat(mahasiswaDto.getAlamat());
+
+        return m;
+    }
 }
